@@ -1,0 +1,20 @@
+<header class="header">
+  UKR.NET
+</header>
+<div class="layout-container">
+  <div class="main-container">
+    <ul class="sidenav sidenav-fixed" [ngClass]="{'sidenav-collapsed': sidenavHidden}"
+        (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+      <li class="bold" *ngFor="let link of links" routerLinkActive="active">
+        <a [routerLink]="[link.url]" class="waves-effect waves-orange">
+          {{ link.name }}
+        </a>
+      </li>
+      <li class="bold last"><a class="waves-effect waves-orange" (click)="logout($event)">Вийти</a></li>
+    </ul>
+
+    <main class="content" [ngStyle]="contentStyle">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

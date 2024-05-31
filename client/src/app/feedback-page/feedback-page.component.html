@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="feedback-form-container">
+    <h2>Форма зворотнього зв'язку</h2>
+    <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+      <div class="input-group">
+        <label for="title">Заголовок</label>
+        <input type="text" id="title" formControlName="title" class="form-control" required>
+      </div>
+      <div class="input-group">
+        <label for="description">Опис</label>
+        <textarea id="description" formControlName="description" class="form-control" required rows="4"></textarea>
+      </div>
+      <button type="submit" class="button btn-primary" [disabled]="!feedbackForm.valid">Надіслати</button>
+    </form>
+  </div>
+  <div class="feedback-list-container">
+    <div class="feedback-list">
+      <ul>
+        <li *ngFor="let feedback of feedbacks" (click)="selectFeedback(feedback)">
+          {{ feedback.title }}
+        </li>
+      </ul>
+    </div>
+    <div class="feedback-details" *ngIf="selectedFeedback">
+      <h2>{{ selectedFeedback.title }}</h2>
+      <p>{{ selectedFeedback.description }}</p>
+      <span>{{ selectedFeedback.createdAt | date:'medium' }}</span>
+
+      <div class="admin-responses">
+        <div *ngFor="let response of selectedFeedback.adminResponses">
+          <p>{{ response.response }}</p>
+          <span>{{ response.respondedAt | date:'medium' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

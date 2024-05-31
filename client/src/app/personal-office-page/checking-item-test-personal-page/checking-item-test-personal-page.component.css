@@ -1,0 +1,39 @@
+.section {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.section-heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.collection {
+  list-style-type: none;
+  padding: 0;
+}
+
+.collection li {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.collection div {
+  margin-bottom: 5px;
+}
+
+.center {
+  text-align: center;
+  color: #666;
+}
+.error {
+  color: red;
+}

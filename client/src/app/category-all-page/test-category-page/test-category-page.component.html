@@ -1,0 +1,31 @@
+<div class="section" id="section2">
+  <div class="section-heading">
+    <h2>Тести</h2>
+  </div>
+  <div class="row" *ngIf="test$ | async as testItem; else loader">
+    <div class="col s12">
+      <div class="collection" *ngIf="testItem.length !== 0; else empty">
+        <div *ngFor="let test of testItem" class="collection-item">
+          <ul>
+            <li>{{ test.name }}</li>
+            <li>{{ test.description }}</li>
+            <li>
+              <a [routerLink]="['/feedbackTest', test._id]" class="btn">
+                Задати питання
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Тести не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

@@ -1,0 +1,28 @@
+<div
+  class="row"
+  *ngIf="categories$ | async as categories; else loader"
+>
+  <div class="col s12">
+    <div class="collection" *ngIf="categories.length !== 0; else empty">
+      <a
+        *ngFor="let category of categories"
+        [routerLink]="['/category', category._id]"
+        class="collection-item"
+      >
+        <ul>
+          <li>{{category.name}}</li>
+          <li>{{category.description}}</li>
+        </ul>
+
+      </a>
+    </div>
+    <ng-template #empty>
+      <div class="center">
+        Категорії не знайдено
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

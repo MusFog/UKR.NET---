@@ -1,0 +1,32 @@
+.test-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collection-item {
+  flex: 1;
+}
+
+.card-action {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.test-container {
+  display: flex;
+  width: 100%;
+}
+
+.left-section {
+  flex: 0 0 70%;
+}
+
+.right-section {
+  flex: 0 0 30%;
+}
+
+.collection-item, .card-action {
+  width: 100%;
+}

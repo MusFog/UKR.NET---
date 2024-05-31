@@ -1,0 +1,51 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: #fff;
+  z-index: 1050;
+  width: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+}
+
+.sidenav-fixed {
+  width: 250px;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidenav-collapsed {
+  transform: translateX(-200px);
+}
+
+.content {
+  flex-grow: 1;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+
+width: calc(100vw - 250px);
+}
+
+.sidenav-fixed:hover {
+  transform: translateX(0);
+}
+
+.content.sidenav-collapsed {
+
+width: calc(100vw - 50px);
+}

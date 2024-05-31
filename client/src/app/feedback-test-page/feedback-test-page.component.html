@@ -1,0 +1,23 @@
+<ng-container *ngIf="testItem">
+  <section *ngIf="testItem.comment?.length" class="comments-section">
+    <h3>Коментарі:</h3>
+    <div *ngFor="let comment of testItem.comment">
+      <div>
+        <strong>{{ comment.createdBy }}:</strong>
+        <p>{{ comment.text }}</p>
+        <p>{{ comment.createdAt | date }}</p>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+
+<div class="comment-form-container">
+  <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+    <div class="form-group">
+      <label for="text">Коментар:</label>
+      <textarea id="text" formControlName="text" rows="3" required></textarea>
+    </div>
+    <button type="submit" [disabled]="commentForm.invalid">Відправити коментар</button>
+  </form>
+</div>

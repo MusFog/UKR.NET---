@@ -1,0 +1,31 @@
+<div class="section" id="section">
+  <div class="section-heading">
+    <h2>Перегляд відповідей</h2>
+  </div>
+  <div *ngIf="details$ | async as details; else loader">
+    <div *ngIf="details.answer.answers.length !== 0; else empty">
+      <p>Запитань: {{ getTotalQuestions(details) }} / Вірно: {{ getCorrectAnswers(details) }}</p>
+      <div>
+        <p>Максимальна оцінка: {{ details.test.mark }} / <input type="number" [(ngModel)]="details.answer.mark" min="0" max="{{ details.test.mark }}"></p>
+        <div *ngIf="!isMarkValid" class="error">Введена оцінка не може бути більшою за максимальну!</div>
+      </div>
+
+      <div *ngFor="let answerDetail of details.answer.answers; let i = index">
+        <div>Питання: {{ answerDetail.question }}</div>
+        <div>Надана відповідь: {{ answerDetail.answer }}</div>
+        <div>Правильна відповідь: {{ answerDetail.correctAnswer }}</div>
+        <div>Статус: {{ answerDetail.correct ? 'Вірно' : 'Невірно' }}</div>
+        <button (click)="toggleCorrectStatus(answerDetail)">Змінити статус</button>
+      </div>
+
+      <button (click)="saveAllChanges()">Зберегти всі зміни та оцінку</button>
+    </div>
+    <ng-template #empty>
+      <div class="center">Відповіді не знайдено</div>
+    </ng-template>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

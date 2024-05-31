@@ -1,0 +1,36 @@
+<div class="section" id="section">
+  <div class="section-heading">
+    <h2>Тести</h2>
+  </div>
+  <input type="text" (input)="onFilterChange($event)"  placeholder="Ім'я тесту">
+  <div
+    class="row"
+    *ngIf="answer$ | async as answerItem; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="answerItem.length !== 0; else empty">
+        <a
+          *ngFor="let answer of answerItem"
+          [routerLink]="['/answerItem', answer._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{answer.name}}</li>
+            <li>{{answer.user}}</li>
+          </ul>
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Тести не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</div>

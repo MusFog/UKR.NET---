@@ -1,0 +1,33 @@
+<div class="section" id="section">
+  <div class="section-heading">
+    <h2>Тести</h2>
+    <input type="text" (input)="onFilterChange($event)"  placeholder="Ім'я тесту">
+  </div>
+  <div class="row" *ngIf="answer$ | async as answerItem; else loader">
+    <div class="col s12">
+      <div *ngIf="answerItem.length !== 0; else empty" class="collection">
+        <div class="test-container" *ngFor="let answer of answerItem">
+          <div class="left-section">
+            <a [routerLink]="['/answerItemForUser', answer._id]" class="collection-item">
+              <ul>
+                <li>{{ answer.name }}</li>
+                <li>Оцінка: {{ answer.answerChecked ? answer.mark : 'Не оцінено' }}</li>
+                <li>Статус: {{ answer.answerChecked ? 'Перевірено' : 'Не перевірено' }}</li>
+              </ul>
+            </a>
+          </div>
+          <div class="right-section">
+            <button class="btn waves-effect waves-light" [routerLink]="['/feedbackTest', answer.testId]">Перейти до запитань</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="center">Тести не знайдено</div>
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>
+

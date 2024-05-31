@@ -1,0 +1,33 @@
+<section class="section container mt-5">
+  <ng-container *ngIf="!loading; else loader">
+    <article *ngIf="test" class="test-item">
+      <header class="mb-4">
+        <h1 class="test-title">{{ test.name }}</h1>
+        <time class="test-date text-muted">{{ test.date | date:'longDate' }}</time>
+        <p class="test-description mb-4">Автор {{test.user?.login}}</p>
+      </header>
+      <section class="test-description mb-4">
+        <p>{{ test.description }}</p>
+      </section>
+      <form [formGroup]="answerForm" (ngSubmit)="submitAnswers()">
+        <div formArrayName="answers">
+          <div *ngFor="let answerControl of answers.controls; let i = index" [formGroupName]="i">
+            <h2 class="question-title">{{ i + 1 }}. {{ getQuestionControl(i).value }}</h2>
+            <label>
+              Ваша відповідь:
+              <input type="text" formControlName="answer" placeholder="Введіть відповідь" required>
+            </label>
+          </div>
+        </div>
+        <button class="button btn-primary" type="submit" [disabled]="answerForm.invalid">Відправити відповіді</button>
+      </form>
+
+
+    </article>
+  </ng-container>
+  <ng-template #loader>
+    <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</section>

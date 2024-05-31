@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col s12">
+    <div class="page-subtitle">
+      <h4>Тести:</h4>
+      <button class="waves-effect waves-light btn grey darken-1 btn-small" data-target="create-modal" (click)="onAddTest()">
+        Додати тест
+      </button>
+    </div>
+    <div *ngIf="!loading; else loader">
+      <div class="collection" *ngIf="test.length !== 0; else empty">
+        <a *ngFor="let testItem of test" class="collection-item collection-item-icon" (click)="onSelectTest(testItem)">
+          <span>
+            {{testItem.name}} <strong>{{testItem.description}}</strong>
+          </span>
+          <span>
+            <i class="material-icons" (click)="onDeleteTest($event, testItem)">delete</i>
+          </span>
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">Немає тестів</div>
+      </ng-template>
+    </div>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div #modal class="modal">
+      <div class="modal-content">
+        <h4 class="mb1">Додати тест</h4>
+        <div class="input-field">
+          <input formControlName="name" id="test-name" type="text" [ngClass]="{'invalid': form.get('name')?.invalid && form.get('name')?.touched}">
+          <label for="test-name">Назва</label>
+          <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="helper-text red-text">
+            Поле назва не має бути пустим
+          </span>
+        </div>
+        <div class="input-field">
+          <textarea id="test-description" formControlName="description" class="materialize-textarea" [ngClass]="{'invalid': form.get('description')?.invalid && form.get('description')?.touched}"></textarea>
+          <label for="test-description">Опис</label>
+          <span *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="helper-text red-text">
+            Поле опису не має бути пустим
+          </span>
+        </div>
+        <div class="input-field">
+          <input formControlName="mark" id="test-mark" type="number" [ngClass]="{'invalid': form.get('mark')?.invalid && form.get('mark')?.touched}">
+          <label for="test-mark">Оцінка</label>
+          <span *ngIf="form.get('mark')?.invalid && form.get('mark')?.touched" class="helper-text red-text">
+            Поле ціни обов'язкове
+          </span>
+        </div>
+
+        <div formArrayName="item">
+          <div *ngFor="let itemControl of item.controls; let i = index" [formGroupName]="i">
+            <div class="input-field">
+              <input formControlName="question" id="question-{{i}}" type="text">
+              <label for="question-{{i}}">Питання</label>
+            </div>
+            <div class="input-field">
+              <textarea formControlName="answer" id="answer-{{i}}" class="materialize-textarea"></textarea>
+              <label for="answer-{{i}}">Відповідь</label>
+            </div>
+            <button type="button" class="btn red" (click)="removeItem(i)">Видалити питання</button>
+          </div>
+        </div>
+        <button type="button" style="margin-top: 10px;" class="btn green" (click)="addItem()">Додати питання</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat" [disabled]="form.disabled">Скасувати</button>
+        <button class="modal-action btn waves-effect" type="submit" [disabled]="form.invalid || form.disabled">Зберегти</button>
+      </div>
+    </div>
+  </form>
+</div>

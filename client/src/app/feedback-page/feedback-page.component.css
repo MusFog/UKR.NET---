@@ -1,0 +1,138 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+
+}
+.form-control {
+}
+
+.feedback-form-container {
+  flex: 1 1 60%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+#description {
+  width: 100%;
+  min-height: 150px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  resize: vertical;
+}
+
+#title {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+.button.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.button.btn-primary[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.feedback-list-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 40%;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.feedback-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-list li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.feedback-list li:last-child {
+  border-bottom: none;
+}
+
+.feedback-list li:hover,
+.feedback-list li.selected {
+  background-color: #f8f8f8;
+}
+
+.feedback-details {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-responses {
+  margin-top: 20px;
+}
+
+.admin-responses div {
+  background: #eef;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.admin-responses div:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  bottom: 100%;
+  border: 10px solid transparent;
+  border-bottom-color: #eef;
+}

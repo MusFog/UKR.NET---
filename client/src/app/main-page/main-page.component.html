@@ -1,0 +1,45 @@
+<div class="ratings-container category-ratings">
+  <h2>Рейтинг Категорій</h2>
+  <ng-container *ngIf="categoryRating$ | async as categoryRatings; else loader">
+    <ul *ngIf="categoryRatings.length > 0; else emptyCategories">
+      <li *ngFor="let rating of categoryRatings">
+        <h3>{{ rating.categoryDetails.name }}</h3>
+        <img [src]="rating.categoryDetails.imageSrc" alt="Image of {{ rating.categoryDetails.name }}">
+        <div>
+          <p>Середній Бал: {{ rating.averageMark }}</p>
+          <p>Опис: {{ rating.categoryDetails.description }}</p>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #emptyCategories>
+    <div class="center">Категорії не знайдено</div>
+  </ng-template>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>
+
+<div class="ratings-container user-ratings-container">
+  <h2>Рейтинг користувачів</h2>
+  <ng-container *ngIf="userRating$ | async as userRatings; else loader">
+    <ul *ngIf="userRatings.length > 0; else emptyUsers">
+      <li *ngFor="let rating of userRatings">
+        <h3>{{ rating.userDetails.login }} ({{ rating.userDetails.roles }})</h3>
+        <div>
+          <p>Середній Бал: {{ rating.normalizedMark }}</p>
+          <p>Середній відсоток успішного проходження тесту: {{ rating.averagePercentage }}%</p>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #emptyUsers>
+    <div class="center">Користувачів не знайдено</div>
+  </ng-template>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>
+
+
+<app-footer></app-footer>

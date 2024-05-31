@@ -1,0 +1,60 @@
+.card {
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.card-content .card-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input-field label {
+  color: #9e9e9e;
+}
+
+.input-field input {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #9e9e9e;
+}
+
+.input-field input.invalid {
+  border-bottom: 1px solid #f44336;
+  box-shadow: 0 1px 0 0 #f44336;
+}
+
+.input-field input.invalid + label {
+  color: #f44336;
+}
+
+.holder-text.red-text {
+  margin-top: 5px;
+  color: #f44336;
+  font-size: 0.8em;
+}
+
+.card-action {
+  text-align: right;
+}
+
+.modal-action.btn.waves-effect {
+  background-color: #26a69a;
+  color: white;
+  margin-top: 20px;
+}
+
+.modal-action.btn.waves-effect:hover {
+  background-color: #2bbbad;
+}
+
+.modal-action.btn.waves-effect:disabled {
+  background-color: #dfdfdf;
+  color: #9f9f9f;
+}

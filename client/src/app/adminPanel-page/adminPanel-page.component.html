@@ -1,0 +1,143 @@
+<div class="section" id="section1">
+  <div class="section-heading">
+    <h2>Категорії</h2>
+    <button class="btn-add" routerLink="/category/new">Додати</button>
+  </div>
+  <div
+    class="row"
+    *ngIf="categories$ | async as categories; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="categories.length !== 0; else empty">
+        <a
+          *ngFor="let category of categories"
+          [routerLink]="['/category', category._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{category.name}}</li>
+            <li>{{category.description}}</li>
+          </ul>
+
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Категорії не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</div>
+
+<div class="section" id="section2">
+  <div class="section-heading">
+    <h2>Тести</h2>
+    <button class="btn-add" routerLink="/test/new">Додати новий тест</button>
+  </div>
+
+  <div class="row" *ngIf="test$ | async as testItem; else loader">
+    <div class="col s12">
+      <div *ngIf="testItem.length !== 0; else empty" class="collection">
+        <div class="test-container">
+          <div class="left-section">
+            <a *ngFor="let test of testItem" [routerLink]="['/answer', test._id]" class="collection-item">
+              <ul>
+                <li>{{ test.name }}</li>
+                <li>{{ test.description }}</li>
+              </ul>
+            </a>
+          </div>
+          <div class="right-section">
+            <div class="card-action" *ngFor="let test of testItem">
+              <button class="btn waves-effect waves-light" [routerLink]="['/feedbackUserTest', test._id]">Перейти до запитань</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="center">Тести не знайдено</div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>
+
+
+
+<div class="section" id="section3">
+  <div class="section-heading">
+    <h2>Тести</h2>
+    <button class="btn-add" routerLink="/answers/check">Перевірити тести</button>
+  </div>
+</div>
+<div class="section user-section">
+  <div class="section-heading">
+    <h2>Користувачі</h2>
+  </div>
+  <div class="row" *ngIf="user$ | async as userItem; else loader">
+    <div class="col s12">
+      <div *ngIf="userItem.length !== 0; else empty" class="collection">
+        <div *ngFor="let user of userItem" class="collection-item avatar">
+          <i class="material-icons circle">person</i>
+          <span class="title">{{ user.login }}</span>
+          <p>{{ user.email }}</p>
+          <p>Роль: {{ user.roles }}</p>
+          <div class="secondary-content">
+            <button class="btn-small waves-effect waves-light" (click)="assignRole(user._id, 'admin')">Адміністратор</button>
+            <button class="btn-small waves-effect waves-light" (click)="assignRole(user._id, 'teacher')">Викладач</button>
+            <button class="btn-small waves-effect waves-light" (click)="assignRole(user._id, 'student')">Студент</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="center">Користувачів не знайдено</div>
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>
+
+
+<div class="container">
+  <div class="feedback-list-container">
+    <div class="feedback-list">
+      <ul>
+        <li *ngFor="let feedback of feedbacks" (click)="selectFeedback(feedback)">
+          <strong>{{ feedback.user?.login }}:</strong> {{ feedback.title }}
+        </li>
+      </ul>
+    </div>
+    <div class="feedback-details" *ngIf="selectedFeedback">
+      <h2>{{ selectedFeedback.title }}</h2>
+      <p>{{ selectedFeedback.description }}</p>
+      <span>{{ selectedFeedback.createdAt | date:'medium' }}</span>
+      <div class="admin-responses">
+        <div *ngFor="let response of selectedFeedback.adminResponses">
+          <p>{{ response.response }}</p>
+          <span>{{ response.respondedAt | date:'medium' }}</span>
+        </div>
+      </div>
+      <div class="admin-response-form" *ngIf="isAdmin">
+        <form [formGroup]="adminResponseForm" (ngSubmit)="submitResponse(selectedFeedback._id)">
+          <textarea formControlName="response" placeholder="Ваша відповідь" rows="4"></textarea>
+          <button type="submit" class="button btn-primary" [disabled]="adminResponseForm.invalid">Відправити відповідь</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+
